@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Spotify Clone | Music Streaming App</title>
+        <meta name="description" content="Spotify Clone built using HTML, CSS and JavaScript">
+        <meta name="theme-color" content="#1D8954">
+        <link rel="icon" href="assets/images/Favicom.png">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="css/animations.css">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    </head>
+    <body>
+        <div class="app">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="logo">
+                    <div class="logo-left">
+                        <i class="fa-brands fa-spotify"></i>
+                        <span>Spotify</span>
+                    </div>
+
+                    <button id="closeSidebar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <nav class="sidebar-menu">
+                    <a href="#" class="menu-item active">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Search</span>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Your Library</span>
+                    </a>
+                </nav>
+
+                <!-- Sidebar Playlist -->
+                <div class="sidebar-playlist">
+                    <div class="playlist-title">
+                        <div class="playlist-heading">
+                            <i class="fa-solid fa-music"></i>
+                            <span>Your Playlist</span>
+                        </div>
+
+                        <button id="createPlaylistBtn" title="Create Playlist">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div class="playlist-container">
+                        <div id="playlistLoader" class="playlist-loader">
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                        </div>
+
+                        <div id="emptyPlaylist" class="empty-playlist">
+                            <i class="fa-solid fa-music"></i>
+                            <h3>Select a Playlist</h3>
+                            <p>Choose any playlist to start listening.</p>
+                        </div>
+
+                        <div id="playlistSongs">
+                            <img src="" alt="" loading="lazy">
+
+                            <div id="noResults" class="no-results">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <h3>No Results Found</h3>
+                                <p>Try searching another song or artist.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main -->
+            <div class="content-wrapper">
+                <main class="main-content">
+                    <header class="header">
+                        <button id="menuToggle" class="menu-toggle">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" placeholder="What do you want to play?">
+
+                            <button id="clearSearch"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+
+                        <div class="header-buttons">
+                            <button class="signup-btn">Sign Up</button>
+                            <button class="login-btn">Log In</button>
+                        </div>
+                    </header>
+
+                    <section class="hero">
+                        <div class="hero-content">
+                            <span class="hero-tag">Spotify Clone</span>
+
+                            <h1>
+                                Listen to your
+                                <span>Favorite Music</span>
+                            </h1>
+
+                            <p>
+                                Discover millions of songs, playlists and
+                                podcasts
+                                anytime, anywhere.
+                            </p>
+
+                            <div class="hero-buttons">
+                                <button class="hero-play">
+                                    <i class="fa-solid fa-play"></i>
+                                    Play Now
+                                </button>
+
+                                <button class="hero-explore">Explore</button>
+                            </div>
+                        </div>
+
+                        <div class="hero-image">
+                            <div class="music-circle">
+                                <i class="fa-brands fa-spotify"></i>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Trending Albums -->
+                    <section class="album-section">
+                        <div class="section-header">
+                            <h2>Trending Albums</h2>
+                            <button class="view-all-btn">Show All</button>
+                        </div>
+
+                        <div class="album-grid" id="trendingAlbums">
+                            <!-- Albums.js se cards aayenge -->
+                        </div>
+                    </section>
+                    
+                    <!-- Recently Played -->
+                    <section class="music-section">
+                        <div class="section-header">
+                            <h2>Recently Played</h2>
+                        </div>
+
+                        <div id="recentAlbums" class="album-grid"></div>
+                    </section>
+                </main>
+            </div>
+                
+                
+            <!-- Music Player -->
+            <footer class="music-player">
+                <!-- Left -->
+                   <div class="player-left">
+                        <img src="assets/images/album1.jpg" alt="Song" id="playerCover">
+
+                    <div class="player-info">
+                        <span id="playerTitle">Select a Song</span>
+
+                        <small id="playerArtist">Unknown Artist</small>
+                    </div>
+                </div>
+
+                <!-- Center -->
+                <div class="player-center">
+                    <div class="equalizer" id="equalizer">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="player-controls">
+                        <button id="shuffleBtn">
+                            <i class="fa-solid fa-shuffle"></i>
+                        </button>
+
+                        <button id="queueToggle">
+                            <i class="fa-solid fa-list"></i>
+                            <span id="queueCount">0</span>
+                        </button>
+
+                        <button id="prevBtn">
+                            <i class="fa-solid fa-backward-step"></i>
+                        </button>
+
+                        <button id="playBtn">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+
+                        <button id="nextBtn">
+                            <i class="fa-solid fa-forward-step"></i>
+                        </button>
+
+                        <button id="repeatBtn">
+                            <i class="fa-solid fa-repeat"></i>
+                        </button>
+                    </div>
+                        
+                    <div class="progress-wrapper">
+                        <span id="currentTime">0:00</span>
+
+                        <div class="progress" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Right -->
+                <div class="player-right">
+                    <button id="volumeBtn">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+
+                    <div class="volume-container">
+                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100">
+                    </div>
+                </div>
+            </footer>
+
+            <!-- Queue Panel -->
+            <div class="queue-panel" id="queuePanel">
+                <div class="queue-header">
+                    <h3>Play Queue</h3>
+
+                    <button id="closeQueue">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div id="queueList" class="queue-list"></div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div id="toast"></div>
+        </div>
+        <div id="sidebarOverlay"></div>
+    </body>
+    <!-- JS of Albums -->
+     <script src="data/arijit.js"></script>
+     <script src="data/atif.js"></script>
+     <script src="data/english.js"></script>
+     <script src="data/kk.js"></script>
+     <script src="data/neha.js"></script>
+    
+    <!-- JS -->
+    <script src="js/app.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/albums.js"></script>
+    <!-- <script src="js/search.js"></script> -->
+
+</html>
